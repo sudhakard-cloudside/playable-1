@@ -1,0 +1,5 @@
+steps:
+- name: 'gcr.io/cloud-builders/git'
+  args: ['clone', '--recursive', 'https://github.com/Unity-Technologies/ProjectTinySamples.git', '.']
+- name: 'gcr.io/cloud-builders/unity'
+  args: ['--batchmode', '--nographics', '--projectPath', 'C:\Users\sudha\OneDrive\Documents', '--buildTarget', 'android', '--executeMethod', 'YourBuildScript.YourBuildMethod']
