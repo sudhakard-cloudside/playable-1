@@ -1,5 +1,8 @@
 steps:
 - name: 'gcr.io/cloud-builders/git'
-  args: ['clone', '--recursive', 'https://github.com/Unity-Technologies/ProjectTinySamples.git', '.']
-- name: 'gcr.io/cloud-builders/unity'
+  args: ['clone', '--recursive', 'https://github.com/Unity-Technologies/ProjectTinySamples.git']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'my-unity-build-image', '.'] # Build the custom Unity image
+- name: 'my-unity-build-image'
+  entrypoint: 'bash'
   args: ['--batchmode', '--nographics', '--projectPath', 'C:\Users\sudha\OneDrive\Documents', '--buildTarget', 'android', '--executeMethod', 'YourBuildScript.YourBuildMethod']
