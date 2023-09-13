@@ -1,4 +1,4 @@
-# Use a Windows Server Core image as the base
+# Use a Windows Server Core image as the base nh
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
 
 # Set environment variables
