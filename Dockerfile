@@ -1,23 +1,23 @@
-FROM ubuntu:latest
+# Use a Windows Server Core image as the base
+FROM mcr.microsoft.com/windows/servercore:ltsc2019
 
-# Install necessary dependencies
-RUN apt-get update && \
-    apt-get install -y wget && \
-    apt-get install -y unzip && \
-    apt-get install -y xvfb && \
-    apt-get install -y libgl1-mesa-dev && \
-    apt-get clean
+# Set environment variables
+ENV UNITY_VERSION 2021.3.0f1
+ENV UNITY_INSTALLER_URL https://download.unity3d.com/download_unity/%UNITY_VERSION%/Windows64EditorInstaller/UnitySetup64-%UNITY_VERSION%.exe
+ENV UNITY_INSTALLER_PATH C:\UnitySetup.exe
 
 # Download and install Unity
-RUN wget -q https://unity3d.com/get-unity/download/archive/2021.2.0f1/installer/linux -O /tmp/unity-installer && \
-    chmod +x /tmp/unity-installer && \
-    /tmp/unity-installer --unattended --install-location=/Unity && \
-    rm /tmp/unity-installer
+RUN Invoke-WebRequest -Uri $env:UNITY_INSTALLER_URL -OutFile $env:UNITY_INSTALLER_PATH -UseBasicParsing ; \
+    Start-Process -FilePath $env:UNITY_INSTALLER_PATH -ArgumentList "/S" -Wait ; \
+    Remove-Item $env:UNITY_INSTALLER_PATH -Force
 
-# Add Unity to the PATH
-ENV PATH="/Unity/Editor:${PATH}"
+# Set the PATH environment variable to include Unity
+RUN setx /M PATH "%PATH%;C:\Program Files\Unity\Editor"
 
-# Additional setup if needed
-# ...
+# Optional: Add any additional dependencies or configurations here
 
-CMD ["bash"]
+# Set the working directory
+WORKDIR C:\UnityProject
+
+# Start a shell session or a custom command (e.g., PowerShell)
+CMD ["powershell"]
