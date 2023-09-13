@@ -1,5 +1,5 @@
-# Use a Windows Server Core image as the base nh
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+# Use a Windows Server Core image as the base
+FROM mcr.microsoft.com/windows/nanoserver:1803-amd64
 
 # Set environment variables
 ENV UNITY_VERSION 2021.3.0f1
