@@ -1,4 +1,4 @@
-# escape=`
+# escape=`d
 FROM microsoft/windowsservercore:1803 as builder
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
