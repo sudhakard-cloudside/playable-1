@@ -1,9 +1,4 @@
-substitutions:
-  _BUILDER: "windows-builder"
-  _REGISTRY: "gcr.io"
 steps:
-- name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', '${_REGISTRY}/cloudside-academy/${_BUILDER}', '.' ]
-images:
-- '${_REGISTRY}/cloudside-academy/${_BUILDER}'
+- name: 'gcr.io/cloudside-academy/windows-builder'
+  args: [ '--command', 'powershell.exe -file build.ps1' ]
 tags: ['cloud-builders-community']
